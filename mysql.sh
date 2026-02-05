@@ -45,8 +45,14 @@ VALIDATE $? "Enabling mysql-server"
 systemctl start mysqld
 VALIDATE $? "Starting mysql-server"
 
+mysql -h 172.31.20.178 -uroot -pExpenseApp@1 -e 'show databases';
+if [ $? -ne 0 ]
+    then
 mysql_secure_installation --set-root-pass ExpenseApp@1
 VALIDATE $? "setting root password" 
+else
+    echo "MYSQL ROOT PASSWORD SETUP HAS BEEN DONE...SKIPPING"
+fi
 
 
 
