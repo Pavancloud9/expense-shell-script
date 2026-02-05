@@ -28,10 +28,10 @@ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Disabling NodeJs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling NodeJS 20"
 
 dnf install nodejs -y  &>>$LOG_FILE_NAME
