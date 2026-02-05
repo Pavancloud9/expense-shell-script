@@ -34,7 +34,7 @@ VALIDATE $? "Disabling NodeJs"
 dnf module enable nodejs:20 -y
 VALIDATE $? "Enabling NodeJS 20"
 
-dnf install nodejs -y
+dnf install nodejs -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
 useradd expense
@@ -48,15 +48,15 @@ VALIDATE $? "Downloading Application code"
 
 cd /app
 
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip 
 VALIDATE $? "Unzipping backend code"
 
-npm install
+npm install  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Dependencies"
 
 cp backend.service /etc/systemd/system/backend.service
 
-dnf install mysql -y
+dnf install mysql -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing mysql-client"
 
 mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
