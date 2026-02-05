@@ -59,8 +59,8 @@ cp backend.service /etc/systemd/system/backend.service
 dnf install mysql -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing mysql-client"
 
-mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql
-VALIDATE $? "Setting up root password"
+mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
+VALIDATE $? "Loading schema to DB"
 
 systemctl daemon-reload
 VALIDATE $? "Daemon-reload"
