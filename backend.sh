@@ -45,7 +45,7 @@ VALIDATE $? "Adding expense user"
 else
     echo "Already Expense ID created...SKIPPING"
 
-mkdir -p /app
+mkdir /app
 VALIDATE $? "Creating App directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
@@ -57,7 +57,7 @@ rm -rf /app/*
 unzip /tmp/backend.zip 
 VALIDATE $? "Unzipping backend code"
 
-npm install 
+npm install   &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Dependencies"
 
 cp /home/ec2-user/expense-shell-script/backend.service /etc/systemd/system/backend.service
