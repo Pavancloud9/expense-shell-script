@@ -37,7 +37,7 @@ VALIDATE $? "Enabling NodeJS 20"
 dnf install nodejs -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
-id expense
+id expense  
 if [ $? -ne 0 ]
 then
     useradd expense
@@ -57,11 +57,13 @@ cd /app
 unzip /tmp/backend.zip 
 VALIDATE $? "Unzipping backend code"
 
-npm install  &>>$LOG_FILE_NAME
+npm install 
 VALIDATE $? "Installing Dependencies"
 
 cp /home/ec2-user/expense-shell-script/backend.service /etc/systemd/system/backend.service
 VALIDATE $? "copying backend service file"
+
+fi
 
 ##### Load DB SCHEMA
 
