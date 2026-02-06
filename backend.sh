@@ -37,8 +37,14 @@ VALIDATE $? "Enabling NodeJS 20"
 dnf install nodejs -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
-useradd expense
+id expense
+if [ $? -ne 0 ]
+then
+    useradd expense
 VALIDATE $? "Adding expense user"
+else
+    echo "Already Expense ID created...SKIPPING"
+
 
 mkdir /app
 VALIDATE $? "Creating App directory"
@@ -55,21 +61,11 @@ npm install  &>>$LOG_FILE_NAME
 VALIDATE $? "Installing Dependencies"
 
 cp /home/ec2-user/expense-shell-script/backend.service /etc/systemd/system/backend.service
+VALIDATE $? "copying backend service file"
 
-dnf install mysql -y &>>$LOG_FILE_NAME
-VALIDATE $? "Installing mysql-client"
+##### Load DB SCHEMA
 
-mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
-VALIDATE $? "Loading schema to DB"
+# dnf install mysql
+# VALIDATE $? "Installing mysql"
 
-systemctl daemon-reload
-VALIDATE $? "Daemon-reload"
-
-systemctl restart backend
-VALIDATE $? "Restarting backend"
-
-
-
-
-
-
+# mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1 < /app/
