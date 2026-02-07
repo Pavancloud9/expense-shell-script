@@ -44,4 +44,18 @@ VALIDATE $? "Starting Nginx"
 rm -rf /usr/share/nginx/html/*
 VALIDATE $? "Removing nginx default page"
 
+curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+VALIDATE $? "Downloading backend code"
+
+cd /usr/share/nginx/html
+VALIDATE "Moving to HTML directory"
+
+unzip /tmp/frontend.zip
+VALIDATE $? "unzipping code"
+
+cp /home/ec2-user/expense-shell-script /etc/nginx/default.d/expense.conf
+VALIDATE $? "copying file"
+
+systemctl restart nginx
+VALIDATE $? "Restarting nginx"
     
