@@ -59,3 +59,11 @@ VALIDATE $? "Unzipping backend code"
 npm install &>>$LOG_FILE_NAME
 VALIDATE $? "Installing dependencies"
 
+cp /home/ec2-user/backend.service /etc/systemd/system/backend.service
+VALIDATE $? "copying service file"
+
+dnf install mysql &>>$LOG_FILE_NAME
+VALIDATE $? "Installing mysql"
+
+mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1 < /app/schema/backend.sql
+VALIDATE $? "Copying Backend file to DB"
