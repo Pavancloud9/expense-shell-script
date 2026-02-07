@@ -26,48 +26,29 @@ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 ##############
 
-echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
+dnf module disable nodejs -y
+VALIDATE $? "Disabling nodejs"
 
-dnf module disable nodejs -y  &>>$LOG_FILE_NAME
-VALIDATE $? "Disabling NodeJs"
+dnf module enable nodejs:20 -y
+VALIDATE $? "Enabling nodejs-20"
 
-dnf module enable nodejs:20 -y  &>>$LOG_FILE_NAME
-VALIDATE $? "Enabling NodeJS 20"
+dnf install nodejs -y
+VALIDATE $? "Installing nodejs"
 
-dnf install nodejs -y  &>>$LOG_FILE_NAME
-VALIDATE $? "Installing NodeJS"
-
-id expense  
-if [ $? -ne 0 ]
-then
-    useradd expense
-VALIDATE $? "Adding expense user"
-else
-    echo "Already Expense ID created...SKIPPING"
+useradd expense
+VALIDATE $? "creating expense user"
 
 mkdir /app
-VALIDATE $? "Creating App directory"
+VALIDATE $? "Creating /app directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-VALIDATE $? "Downloading Application code"
+VALIDATE $? "Downloading application code"
 
 cd /app
-rm -rf /app/*
 
-unzip /tmp/backend.zip 
+unzip /tmp/backend.zip
 VALIDATE $? "Unzipping backend code"
 
-npm install   &>>$LOG_FILE_NAME
-VALIDATE $? "Installing Dependencies"
+npm install
+VALIDATE $? "Installing dependencies"
 
-cp /home/ec2-user/expense-shell-script/backend.service /etc/systemd/system/backend.service
-VALIDATE $? "copying backend service file"
-
-fi
-
-##### Load DB SCHEMA
-
-# dnf install mysql
-# VALIDATE $? "Installing mysql"
-
-# mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1 < /app/
