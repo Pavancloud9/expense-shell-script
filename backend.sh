@@ -52,9 +52,9 @@ VALIDATE $? "Downloading application code"
 
 cd /app
 
-unzip /tmp/backend.zip
-VALIDATE $? "Unzipping backend code"
+# unzip /tmp/backend.zip
+# VALIDATE $? "Unzipping backend code"
 
-npm install
-VALIDATE $? "Installing dependencies"
+# npm install
+# VALIDATE $? "Installing dependencies"
 
