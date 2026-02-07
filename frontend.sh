@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROOTID=$(id -u)
-if [ $? -ne 0 ]
+if [ $ROOTID -ne 0 ]
 then
     echo "ERROR:: You must have sudo access to execute this script"
     exit 1
