@@ -37,7 +37,13 @@ VALIDATE $? "Enabling mysql-server"
 systemctl start mysqld
 VALIDATE $? "Starting mysql-server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
-VALIDATE $? "Setting up mysql-server password"
+mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1 -e 'show databases;'
+if [ $? -ne 0 ]
+then
+    echo "Mysql-server root password set up was not done"
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    VALIDATE $? "Setting up mysql-server password"
+else
+    echo "Mysql-root Password setup already done....SKIPPING"
 
 
