@@ -26,10 +26,10 @@ echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
 
 ############
 
-dnf list installed nginx  &>>$LOG_FILE_NAME
+dnf list installed nginx &>>$LOG_FILE_NAME
 if [ $? -ne 0 ]
 then
-    dnf install nginx -y  &>>$LOG_FILE_NAME
+    dnf install nginx -y &>>$LOG_FILE_NAME
     VALIDATE $? "Installing nginx"
 else
     echo "Nginx already installed...SKIPPING"
