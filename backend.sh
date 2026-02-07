@@ -51,6 +51,7 @@ curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expen
 VALIDATE $? "Downloading application code"
 
 cd /app
+rm -rf /app/*
 
 unzip /tmp/backend.zip
 VALIDATE $? "Unzipping backend code"
