@@ -53,9 +53,9 @@ VALIDATE $? "Downloading application code"
 cd /app
 rm -rf /app/*
 
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip  &>>$LOG_FILE_NAME
 VALIDATE $? "Unzipping backend code"
 
-npm install
+npm install &>>$LOG_FILE_NAME
 VALIDATE $? "Installing dependencies"
 
