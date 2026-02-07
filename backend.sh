@@ -35,7 +35,7 @@ VALIDATE $? "Enabling nodejs-20"
 dnf install nodejs -y    &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
-id expense
+id expense  &>>$LOG_FILE_NAME
 if [ $? -ne 0 ]
 then
     useradd expense
@@ -44,7 +44,7 @@ else
     echo "Expense user already created...SKIPPING"
 fi
 
-mkdir /app
+mkdir -p /app
 VALIDATE $? "Creating /app directory"
 
 curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
