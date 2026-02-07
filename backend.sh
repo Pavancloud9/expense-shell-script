@@ -26,13 +26,13 @@ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 ##############
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y   &>>$LOG_FILE_NAME
 VALIDATE $? "Disabling nodejs"
 
-dnf module enable nodejs:20 -y
+dnf module enable nodejs:20 -y  &>>$LOG_FILE_NAME
 VALIDATE $? "Enabling nodejs-20"
 
-dnf install nodejs -y
+dnf install nodejs -y    &>>$LOG_FILE_NAME
 VALIDATE $? "Installing nodejs"
 
 useradd expense
