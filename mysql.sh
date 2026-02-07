@@ -28,4 +28,16 @@ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
 
+dnf install mysql-server -y
+VALIDATE $? "Installing mysql-server"
+
+systemctl enable mysqld
+VALIDATE $? "Enabling mysql-server"
+
+systemctl start mysqld
+VALIDATE $? "Starting mysql-server"
+
+mysql_secure_installation --set-root-pass ExpenseApp@1
+VALIDATE $? "Setting up mysql-server password"
+
 
