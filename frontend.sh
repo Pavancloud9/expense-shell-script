@@ -53,7 +53,7 @@ VALIDATE "Moving to HTML directory"
 unzip /tmp/frontend.zip
 VALIDATE $? "unzipping code"
 
-cp /home/ec2-user/expense-shell-script /etc/nginx/default.d/expense.conf
+cp /home/ec2-user/expense-shell-script/expense.conf /etc/nginx/default.d/expense.conf
 VALIDATE $? "copying file"
 
 systemctl restart nginx
