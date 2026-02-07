@@ -28,7 +28,7 @@ LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
 
 echo "Script started executing at $TIMESTAMP" &>>$LOG_FILE_NAME
 
-dnf install mysql-server -y
+dnf install mysql-server -y  &>>$TIMESTAMP
 VALIDATE $? "Installing mysql-server"
 
 systemctl enable mysqld
