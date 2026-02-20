@@ -1,2 +1,3 @@
+#!/bin/bash
+
 mkdir /app
-VALIDATE $? "Creating /app directory"
