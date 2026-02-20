@@ -47,3 +47,5 @@ else
     echo "Mysql-root Password setup already done....SKIPPING"
 fi
 
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    VALIDATE $? "Setting up mysql-server password"
